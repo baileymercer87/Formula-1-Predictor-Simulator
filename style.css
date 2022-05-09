@@ -44,7 +44,7 @@ li {
     background-color: black;
     border-radius: 5px;
     color: white;
-    opacity: 75%;
+    opacity: 80%;
     animation: pract;
     animation-duration: 1.2s;
 }
@@ -81,4 +81,28 @@ label {
 
 label, select {
     margin-top: 2vh;
+}
+
+button {
+    padding: 1vh;
+    font-size: 2vh;
+    display: block;
+    border-radius: 5px;
+    color: black;
+    background-color: white;
+    border: solid black 2px;
+    margin: auto;
+    margin-top: 5vh;
+    cursor: pointer;
+    animation: button;
+    animation-duration: 1s;
+}
+
+@keyframes button {
+    0% {padding:0vh}
+    100%{padding:1vh}
+}
+
+button:hover {
+    background-color: ghostwhite;
 }
