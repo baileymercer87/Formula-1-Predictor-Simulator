@@ -1,12 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap');
+
 body {
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+    letter-spacing: 2px;
+}
+
+html { 
+    background: url(/Formula-1-Predictor-Simulator/images/background.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-blend-mode: darken;
+  }
+
 h1 {
     margin: 0;
     padding: 0;
+    color: white;
 }
 
 aside {
@@ -25,9 +42,20 @@ li {
     margin-top: 1vh;
     margin-left: 0;
     background-color: black;
-    opacity: 60%;
     border-radius: 5px;
     color: white;
+    opacity: 75%;
+    animation: pract;
+    animation-duration: 1.2s;
+}
+
+@keyframes pract {
+    0% {width:0vw}
+    100%{width:20vw}
+}
+
+li:hover {
+    background-color: aqua;
 }
 
 ul {
@@ -45,4 +73,12 @@ h2 {
     background-color: white;
     opacity: 80%;
     text-align: center;
+}
+
+label {
+    color: white;
+}
+
+label, select {
+    margin-top: 2vh;
 }

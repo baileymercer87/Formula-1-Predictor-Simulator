@@ -7,23 +7,15 @@
 </head>
 
 
-<body id="main" onload=get2()>
+<body id="main" onload="get2(), loadTracks()">
     <aside>
       <ul id="presentList">
-        <li><h2>1</h2></li>
-        <li><h2>2</h2></li>
-        <li><h2>3</h2></li>
-        <li><h2>4</h2></li>
-        <li><h2>5</h2></li>
-        <li><h2>6</h2></li>
-        <li><h2>7</h2></li>
-        <li><h2>8</h2></li>
-        <li><h2>9</h2></li>
-        <li><h2>10</h2></li>
       </ul>
     </aside>
-    <h1 onclick="getConstructor()">Formula 1 Simulator</h1>
-    <h1 onclick="getCurrentStandings()">CLICK</h1>
+    <h1 onclick="getCurrentStandings()">Formula 1 Simulator</h1>
+    <label>Select Track:</label>
+    <select id="trackOption">
+    </select>
 </body>
 
 <script src="index.js"></script>
