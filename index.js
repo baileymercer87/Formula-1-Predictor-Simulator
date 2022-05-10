@@ -108,6 +108,26 @@ async function getDriversList () {
     return driverList;
 }
 
+async function getSeasonResults (driversList) {
+    for (let i=0;i < driversList.length; i++) {
+        const response = await fetch('http://ergast.com/api/f1/current/drivers/'+driversList[i][0]+ '/results.json');
+        var driver = await response.json();
+        var driverResults = driver.MRData.RaceTable.Races;
+        driverList[i].push([]);
+        for (let x=0; x < driverResults.length; x++) {
+            if (driverResults[x].Results[0].position < 16) {
+                driversList[i][8].push(driverResults[x].Results[0].position);
+            }
+        }
+    }
+    return driversList;
+}
+
+async function getPreviousRaces (driversList) {
+    
+}
+
+
 async function predictRace () {
 
     let driversList = await getDriversList();
@@ -121,14 +141,21 @@ async function predictRace () {
     //const allDriverStandings = getAllDriverStandings();
     //const allConstructorStandings = getAllConstructorStandings();
 
-    const seasonResults = getSeasonResults();
-    const previousTrackResults = getPreviousRaces ();
+    driversList = await getSeasonResults(driversList);
+    console.log(driversList);
+    previousRaces = await getPreviousRaces (driversList);
+    console.log(driversList);
 
     const crashes = getSeasonCrashes();
-    const allCrashes = getAllCrashes();
-
     const weather = getWeather();
 }
 
 
-//format = [driver ID, first name, last name, driver standing pos, driver points, constructor id, constructor standing pos, constructor points]
+//format = [driver ID, 0
+//first name, 1
+//last name, 2
+//driver standing pos, 3
+//driver points, 4
+//constructor id, 5
+//constructor standing pos, 6
+//constructor points]7
