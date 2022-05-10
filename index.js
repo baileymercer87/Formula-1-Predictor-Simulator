@@ -124,13 +124,48 @@ async function getSeasonResults (driversList) {
 }
 
 async function getPreviousRaces (driversList) {
-    
+    var year = 2017;
+    for (let i=0; i < 5; i++) {
+        const response = await fetch('https://ergast.com/api/f1/' + year + '/circuits/albert_park/results.json');
+        const race = await response.json();
+        year = year + 1;
+        if (race.MRData.RaceTable.Races[0] !== undefined){
+            const results = race.MRData.RaceTable.Races[0].Results;
+            for (let x=0; x < driversList.length; x++) {
+                if (driversList[x][9] === undefined){
+                    driversList[x][9] = [];
+                }
+                for (let y=0; y < results.length; y++) {
+                    if (results[y].Driver.driverId === driversList[x][0]){
+                        driversList[x][9].push(results[y].position);
+                    }
+                }
+            }
+        }
+    }
+    return driverList;
 }
 
+async function getSeasonCrashes (driversList) {
+    for (let i=0; i < driversList.length; i++) {
+        driversList[i][10] = 0;
+        const response = await fetch('https://ergast.com/api/f1/2022/drivers/' + driversList[i][0] +'/status.json');
+        const crashes = await response.json()
+        for (let x=0; x < crashes.MRData.StatusTable.Status.length; x++) {
+            if (crashes.MRData.StatusTable.Status[x].statusId !== '1') {
+                if (crashes.MRData.StatusTable.Status[x].statusId !== '11') {
+                    driversList[i][10] = driversList[i][10] + parseInt(crashes.MRData.StatusTable.Status[x].count);
+                }
+            }
+        }
+    }
+    return driversList
+}
 
 async function predictRace () {
 
     let driversList = await getDriversList();
+    let prediction = await getDriversList();
     
     driversList = await getDriverStandings(driversList);
     console.log(driversList);
@@ -138,15 +173,14 @@ async function predictRace () {
     driversList = await getConstructorStandings(driversList);
     console.log(driversList);
 
-    //const allDriverStandings = getAllDriverStandings();
-    //const allConstructorStandings = getAllConstructorStandings();
-
     driversList = await getSeasonResults(driversList);
     console.log(driversList);
     previousRaces = await getPreviousRaces (driversList);
     console.log(driversList);
 
-    const crashes = getSeasonCrashes();
+    driversList = await getSeasonCrashes(driversList);
+    console.log(driversList);
+
     const weather = getWeather();
 }
 
@@ -158,4 +192,9 @@ async function predictRace () {
 //driver points, 4
 //constructor id, 5
 //constructor standing pos, 6
-//constructor points]7
+//constructor points, 7
+//array of season results, 8
+//array of previous track, 9
+//num of crashes, 10  
+
+
