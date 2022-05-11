@@ -233,7 +233,30 @@ function simulateRace (drivers) {
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
-  }
+}
+
+
+
+function updateInterface(i, result) {      
+    setTimeout(function() {   
+        const list = document.getElementById("presentList"); 
+        
+        const lname = result[i][0];
+        const fname = result[i][1];
+        const constructor = result[i][2];
+
+        var color = getConstructor(constructor);
+        const item = document.createElement("li");
+        var name = (i+1) + ". " + fname + " " + lname;
+        item.innerHTML = name;
+        item.style.backgroundColor = color;
+        list.appendChild(item);
+        i++;             
+        if (i < 10) {    
+            updateInterface(i, result);            
+        }                       
+    }, 500)
+    }
 
 async function predictRace () {
 
@@ -257,9 +280,30 @@ async function predictRace () {
     driversList = crashModifier(driversList);
 
     driversList = simulateRace(driversList);
-    console.log(driversList);
 
+    driversList.sort(function(a,b) {
+        return a[11]-b[11]
+    });
+    console.log(driversList);
+    const notCrashed = []
+    const crashed = []
+
+    for (i=0; i < driversList.length; i++) {
+        if (driversList[i][11] === '0') {
+            crashed.push([driversList[i][1], driversList[i][2], driversList[i][5], 'Crashed']);
+        }
+        else {
+            notCrashed.push([driversList[i][1], driversList[i][2], driversList[i][5], 'Not Crashed']);
+        }
+    }
+    const finalResult = notCrashed.concat(crashed);
+
+    const list = document.getElementById("presentList");
+    list.innerHTML = "";
+
+    updateInterface(0, finalResult);
 }
+
 
 
 //format = [driver ID, 0
