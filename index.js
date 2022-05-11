@@ -113,7 +113,7 @@ async function getSeasonResults (driversList) {
         const response = await fetch('http://ergast.com/api/f1/current/drivers/'+driversList[i][0]+ '/results.json');
         var driver = await response.json();
         var driverResults = driver.MRData.RaceTable.Races;
-        driverList[i].push([]);
+        driverList[i][8] = [];
         for (let x=0; x < driverResults.length; x++) {
             if (driverResults[x].Results[0].position < 16) {
                 driversList[i][8].push(driverResults[x].Results[0].position);
@@ -162,26 +162,49 @@ async function getSeasonCrashes (driversList) {
     return driversList
 }
 
+function calculateAverage (drivers) {
+    for (let i=0; i < drivers.length; i++){
+        let average = 0;
+        const lengthResults = drivers[i][8].length * 2;
+        const lengthTrack = drivers[i][9].length;
+        const length = lengthResults + lengthTrack;
+
+        for (let x=0; x < drivers[i][8].length; x++) {
+            average = average + parseInt(drivers[i][8][x]);
+            average = average + parseInt(drivers[i][8][x]);
+            drivers[i][11] = average;
+        }
+
+        for (let y=0; y < drivers[i][9].length; y++) {
+            average = average + parseInt(drivers[i][9][y]);
+            drivers[i][11] = average;
+        }
+
+        average = drivers[i][11] / length;
+        drivers[i][11] = average.toFixed(1);
+        console.log(drivers[i][0] + ": " + drivers[i][11]);
+    }
+    return drivers;
+}
+
 async function predictRace () {
 
     let driversList = await getDriversList();
-    let prediction = await getDriversList();
-    
+
     driversList = await getDriverStandings(driversList);
-    console.log(driversList);
 
     driversList = await getConstructorStandings(driversList);
-    console.log(driversList);
 
     driversList = await getSeasonResults(driversList);
-    console.log(driversList);
+
     previousRaces = await getPreviousRaces (driversList);
-    console.log(driversList);
 
     driversList = await getSeasonCrashes(driversList);
-    console.log(driversList);
 
-    const weather = getWeather();
+    //const weather = getWeather();
+    driversList = calculateAverage(driversList);
+    console.log(driversList);
+    
 }
 
 
