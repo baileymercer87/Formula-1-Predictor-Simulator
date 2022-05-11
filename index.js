@@ -212,8 +212,23 @@ function crashModifier (drivers) {
 function simulateRace (drivers) {
     for (let i=0; i < drivers.length; i++) {
         const number = randomInt(80, 120);
-        console.log(number);
+        let randomMultiplier = 0;
+        if (number > 99) {
+            randomMultiplier = parseFloat('1.' + number);
+        } else {
+            randomMultiplier = parseFloat('0.' + number);
+        }
+        const finalTime = drivers[i][11] * randomMultiplier;
+        drivers[i][11] = finalTime.toFixed(2);
+
+        const crashNumber = randomInt(0, 100);
+        const crashValue = 8 + (drivers[i][10] * 3);
+
+        if (crashNumber < crashValue) {
+            drivers[i][11] = '0';
+        }
     }
+    return drivers;
 }
 
 function randomInt(min, max) {
@@ -231,9 +246,9 @@ async function predictRace () {
     driversList = await getSeasonResults(driversList);
 
     driversList = await getPreviousRaces (driversList);
-    console.log(driversList);
+
     driversList = await getSeasonCrashes(driversList);
-    console.log(driversList);
+
     //const weather = getWeather();
     driversList = calculateAverage(driversList);
     
@@ -242,6 +257,7 @@ async function predictRace () {
     driversList = crashModifier(driversList);
 
     driversList = simulateRace(driversList);
+    console.log(driversList);
 
 }
 
