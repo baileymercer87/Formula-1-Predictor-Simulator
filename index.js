@@ -125,8 +125,10 @@ async function getSeasonResults (driversList) {
 
 async function getPreviousRaces (driversList) {
     var year = 2017;
+    var track = document.getElementById("trackOption");
+    var selectedTrack = track.value;
     for (let i=0; i < 5; i++) {
-        const response = await fetch('https://ergast.com/api/f1/' + year + '/circuits/albert_park/results.json');
+        const response = await fetch('https://ergast.com/api/f1/' + year + '/circuits/' + selectedTrack +'/results.json');
         const race = await response.json();
         year = year + 1;
         if (race.MRData.RaceTable.Races[0] !== undefined){
@@ -168,19 +170,14 @@ function calculateAverage (drivers) {
         const lengthResults = drivers[i][8].length * 2;
         const lengthTrack = drivers[i][9].length;
         const length = lengthResults + lengthTrack;
-
         for (let x=0; x < drivers[i][8].length; x++) {
             average = average + parseInt(drivers[i][8][x]);
             average = average + parseInt(drivers[i][8][x]);
-            drivers[i][11] = average;
         }
-
         for (let y=0; y < drivers[i][9].length; y++) {
             average = average + parseInt(drivers[i][9][y]);
-            drivers[i][11] = average;
         }
-
-        average = drivers[i][11] / length;
+        average = average / length;
         drivers[i][11] = average.toFixed(1);
         console.log(drivers[i][0] + ": " + drivers[i][11]);
     }
@@ -197,14 +194,14 @@ async function predictRace () {
 
     driversList = await getSeasonResults(driversList);
 
-    previousRaces = await getPreviousRaces (driversList);
-
+    driversList = await getPreviousRaces (driversList);
+    console.log(driversList);
     driversList = await getSeasonCrashes(driversList);
-
+    console.log(driversList);
     //const weather = getWeather();
     driversList = calculateAverage(driversList);
     console.log(driversList);
-    
+
 }
 
 
