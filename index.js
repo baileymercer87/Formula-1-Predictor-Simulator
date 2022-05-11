@@ -178,11 +178,47 @@ function calculateAverage (drivers) {
             average = average + parseInt(drivers[i][9][y]);
         }
         average = average / length;
-        drivers[i][11] = average.toFixed(1);
+        drivers[i][11] = average.toFixed(2);
         console.log(drivers[i][0] + ": " + drivers[i][11]);
     }
     return drivers;
 }
+
+function calculatePointsModifier(drivers) {
+    for (let i =0; i < drivers.length; i++) {
+        const driverPoints = parseInt(drivers[i][4]) / 100;
+        const modifier = parseFloat('1.' + driverPoints)
+        const newValue = drivers[i][11] * (2 - modifier);
+        drivers[i][11] = newValue.toFixed(2);
+
+        const constructorPoints = parseInt(drivers[i][7]) / 100
+        const constructorModifier = parseFloat('1.' + constructorPoints)
+        const newConstValue = drivers[i][11] * (2 - constructorModifier);
+        drivers[i][11] = newConstValue.toFixed(2);
+    }
+    return drivers;
+}
+
+function crashModifier (drivers) {
+    for (let i=0; i < drivers.length; i++) {
+        const modifierValue = parseFloat("1.0" + (drivers[i][10] *2))
+        const newValue = drivers[i][11] * modifierValue
+        drivers[i][11] = newValue.toFixed(2);
+    }
+    return drivers;
+}
+
+
+function simulateRace (drivers) {
+    for (let i=0; i < drivers.length; i++) {
+        const number = randomInt(80, 120);
+        console.log(number);
+    }
+}
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
 
 async function predictRace () {
 
@@ -200,7 +236,12 @@ async function predictRace () {
     console.log(driversList);
     //const weather = getWeather();
     driversList = calculateAverage(driversList);
-    console.log(driversList);
+    
+    driversList = calculatePointsModifier(driversList);
+
+    driversList = crashModifier(driversList);
+
+    driversList = simulateRace(driversList);
 
 }
 
@@ -208,13 +249,13 @@ async function predictRace () {
 //format = [driver ID, 0
 //first name, 1
 //last name, 2
-//driver standing pos, 3
-//driver points, 4
+    //driver standing pos, 3
+    //driver points, 4
 //constructor id, 5
-//constructor standing pos, 6
-//constructor points, 7
-//array of season results, 8
-//array of previous track, 9
+    //constructor standing pos, 6
+    //constructor points, 7
+    //array of season results, 8
+    //array of previous track, 9
 //num of crashes, 10  
 
 
