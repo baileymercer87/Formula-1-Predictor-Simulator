@@ -167,15 +167,18 @@ async function getSeasonCrashes (driversList) {
 function calculateAverage (drivers) {
     for (let i=0; i < drivers.length; i++){
         let average = 0;
-        const lengthResults = drivers[i][8].length * 2;
-        const lengthTrack = drivers[i][9].length;
+        const lengthResults = (drivers[i][8].length * 2);
+        let lengthTrack = 0
+        if (drivers[i][9]) {
+            lengthTrack = (drivers[i][9].length);
+            for (let y=0; y < drivers[i][9].length; y++) {
+                average = average + parseInt(drivers[i][9][y]);
+            }
+        } 
         const length = lengthResults + lengthTrack;
         for (let x=0; x < drivers[i][8].length; x++) {
             average = average + parseInt(drivers[i][8][x]);
             average = average + parseInt(drivers[i][8][x]);
-        }
-        for (let y=0; y < drivers[i][9].length; y++) {
-            average = average + parseInt(drivers[i][9][y]);
         }
         average = average / length;
         drivers[i][11] = average.toFixed(2);
