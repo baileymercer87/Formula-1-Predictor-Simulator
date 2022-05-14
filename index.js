@@ -1,6 +1,7 @@
 const teamColors = [['ferrari', '#A6051A'], ['red_bull', '#0600EF'], ['mercedes', '	#00D2BE'], ['mclaren', '#FF8700'], ['alpine', '#0090FF'], ['alfa', '#900000'], ['haas', '#DBDBDB'], ['alphatauri', '	#2B4562'], ['williams', '#005AFF'], ['aston_martin', '	#006F62']];
 
-async function get2() {
+
+async function loadLeaderboard() {
     const response = await fetch('http://ergast.com/api/f1/current/driverStandings.json');
     var drivers = await response.json();
 
