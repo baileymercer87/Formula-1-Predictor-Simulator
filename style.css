@@ -118,18 +118,19 @@ button:hover {
 }
 
 #infoArea {
-    margin-left: 2vw;
+    margin-left: 3vw;
     margin-top: 5vh;
     height: 90vh;
-    width: 36vw;
+    width: 34vw;
     border-radius: 2vw;
     background-color: rgba(0, 0, 0, 0.6);
+    display: inline-block;
 }
 
 h3 {
     color: white;
     float: left;
-    width: 36vw;
+    width: 34vw;
     text-align: center;
     font-size: 3vh;
 }
@@ -139,11 +140,27 @@ h3 {
     height: 15vh; 
     margin-left: 1vw;
     border-radius: 1vw;
-    background-color: rgba(0, 0, 0, 0.6);
     border: 1px solid white;
     display: inline-block;
 }
 
 .weather:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+img {
+    height: 8vh;
+    width: 8vh;
+    margin: 0;
+    margin-left: 2vw;
+    padding: 0;
+    display: block;
+
+}
+
+p {
+    color: white;
+    display: block;
+    margin: 0;
+    padding: 0;
 }

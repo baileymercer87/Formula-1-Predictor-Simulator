@@ -50,6 +50,9 @@ async function loadTracks () {
         item.innerHTML = circuit;
         document.getElementById("trackOption").appendChild(item);
     }
+    var track = document.getElementById("trackOption");
+    var selectedTrack = track[0].innerHTML;
+    document.getElementById("trackTitle").innerHTML = selectedTrack;
 }
 
 
@@ -245,6 +248,21 @@ async function getWeather (driversList, city) {
     const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + weather_API_Key)
     const data = await response.json();
     console.log(data);
+    const { name } = data;
+    const { icon, description } = data.weather[0];
+    const { temp } = data.main;
+    const { speed } = data.wind;
+    console.log(name + icon + description + temp + speed);
+
+    const iconURL = 'http://openweathermap.org/img/wn/' + icon + '@2x.png'
+    const box1 = document.getElementById("weather1");
+    const item = document.createElement("img");
+    item.src = iconURL;
+    box1.appendChild(item);
+    const temperature = document.createElement("p");
+    temperature.innerHTML = temp;
+    box1.appendChild(temperature);
+    
 }
 
 
