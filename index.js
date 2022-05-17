@@ -254,15 +254,18 @@ async function getWeather (driversList, city) {
     const { speed } = data.wind;
     console.log(name + icon + description + temp + speed);
 
-    const iconURL = 'http://openweathermap.org/img/wn/' + icon + '@2x.png'
-    const box1 = document.getElementById("weather1");
-    const item = document.createElement("img");
-    item.src = iconURL;
-    box1.appendChild(item);
-    const temperature = document.createElement("p");
-    temperature.innerHTML = temp;
-    box1.appendChild(temperature);
-    
+    let elements = document.getElementsByClassName('weather');
+    console.log(elements);
+    for (let i=0; i < elements.length; i++){ 
+        elements[i].innerHTML = "";
+        const iconURL = 'http://openweathermap.org/img/wn/' + icon + '@2x.png'
+        const item = document.createElement("img");
+        item.src = iconURL;
+        elements[i].appendChild(item);
+        const temperature = document.createElement("p");
+        temperature.innerHTML = temp;
+        elements[i].appendChild(temperature);
+    }
 }
 
 
@@ -270,8 +273,8 @@ function updateInterface(i, result) {
     setTimeout(function() {   
         const list = document.getElementById("presentList"); 
         
-        const lname = result[i][0];
-        const fname = result[i][1];
+        const fname = result[i][0];
+        const lname = result[i][1];
         const constructor = result[i][2];
 
         var color = getConstructor(constructor);

@@ -55,7 +55,7 @@ li {
     color: white;
     opacity: 80%;
     animation: pract;
-    animation-duration: 1.2s;
+    animation-duration: 0.6s;
 }
 
 @keyframes pract {
@@ -155,7 +155,13 @@ img {
     margin-left: 2vw;
     padding: 0;
     display: block;
+    animation: image;
+    animation-duration: 0.5s;
+}
 
+@keyframes image {
+    0% {opacity: 0%}
+    100%{opacity: 100%}
 }
 
 p {
