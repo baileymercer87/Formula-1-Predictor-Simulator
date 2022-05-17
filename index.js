@@ -241,8 +241,10 @@ function randomInt(min, max) {
 }
 
 
-async function getWeather (driversList) {
-    console.log('fetch weather');
+async function getWeather (driversList, city) {
+    const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + weather_API_Key)
+    const data = await response.json();
+    console.log(data);
 }
 
 
@@ -311,6 +313,8 @@ async function predictRace () {
     list.innerHTML = "";
 
     updateInterface(0, finalResult);
+
+    getWeather(driversList, 'miami');
 }
 
 
