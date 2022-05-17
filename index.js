@@ -57,6 +57,14 @@ async function loadTracks () {
     getWeather(37.8501, 144.9690);
 }
 
+async function getTimes (raceNum) {
+    const response = await fetch('http://ergast.com/api/f1/2022/' + raceNum + '.json');
+    const data = await response.json();
+    const circuitData = data.MRData.RaceTable.Races[0];
+    console.log(circuitData);
+}
+
+
 
 async function getDriverStandings (driversList) {
     driverStand = [];
@@ -296,8 +304,6 @@ function updateInterface(i, result) {
 async function trackChange () {
     const selectBox = document.getElementById('trackOption');
     const selected = selectBox.value;
-    const index = selectBox.selectedIndex;
-    document.getElementById("trackTitle").innerHTML = selectBox[index].innerHTML;
 
     const response = await fetch('http://ergast.com/api/f1/circuits/' + selected + '.json');
     const data = await response.json();
@@ -305,7 +311,26 @@ async function trackChange () {
     const lat = data.MRData.CircuitTable.Circuits[0].Location.lat;
     const long = data.MRData.CircuitTable.Circuits[0].Location.long;
     getWeather(lat, long);
+
+    const response1 = await fetch('http://ergast.com/api/f1/2022.json');
+    const data1 = await response1.json();
+    const races = data1.MRData.RaceTable.Races;
+    for (let i=0; i < races.length; i++) {
+        if (races[i].Circuit.circuitId === selected) {
+            console.log(races[i]);
+            const timesArea = document.getElementsByClassName('times');
+            timesArea[0].innerHTML = 'FP1 - ' + races[i].FirstPractice.time;
+            timesArea[1].innerHTML = 'FP2 - ' + races[i].SecondPractice.time;
+            timesArea[2].innerHTML = 'FP3 - ' + races[i].ThirdPractice.time;
+            timesArea[3].innerHTML = 'Qualifying - ' + races[i].Qualifying.time;
+            timesArea[4].innerHTML = 'Race - ' + races[i].time;
+            document.getElementById('trackTitle').innerHTML = races[i].raceName;
+        }
+    }
+
+
 }
+
 
 
 async function predictRace () {
