@@ -8,16 +8,28 @@
 
 
 <body id="main" onload="loadLeaderboard(), loadTracks()">
-    <aside>
+    <aside id="column1">
       <ul id="presentList">
       </ul>
     </aside>
-    <h1>Formula 1 Simulator</h1>
-    <label>Select Track:</label>
-    <select id="trackOption">
-    </select>
 
-    <button type="submit" onclick="predictRace()">Predict Race</button>
+    <aside id="column2">
+      <h1>Formula 1 Simulator</h1>
+      <label>Select Track:</label>
+      <select id="trackOption">
+      </select>
+
+      <button type="submit" onclick="predictRace()">Predict Race</button>
+    </aside>
+
+    <aside id="column3">
+      <section id="infoArea">
+        <h3>Track Name</h3>
+        <div class="weather"></div>
+        <div class="weather"></div>
+        <div class="weather"></div>
+    </section>
+    </aside>
 </body>
 
 <script src="index.js"></script>

@@ -27,14 +27,23 @@ h1 {
 }
 
 aside {
-    width: 20vw;
-    height: 100vh;
     float: left;
-    margin-top: 1vh;
-    margin-left: 1vw;
-    padding: 0;
-    position: absolute;
+    height: 100vh;
 }
+
+#column1 {
+    width: 20vw;
+}
+
+#column2 {
+    width: 40vw;
+}
+
+#column3 {
+    width: 40vw;
+}
+  
+
 
 li {
     height: 8vh;
@@ -59,7 +68,8 @@ li:hover {
 }
 
 ul {
-    margin: 0;
+    margin-top: 3vh;
+    margin-left: 1vw;
     padding: 0;
     list-style: none;
 }
@@ -105,4 +115,35 @@ button {
 
 button:hover {
     background-color: ghostwhite;
+}
+
+#infoArea {
+    margin-left: 2vw;
+    margin-top: 5vh;
+    height: 90vh;
+    width: 36vw;
+    border-radius: 2vw;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+h3 {
+    color: white;
+    float: left;
+    width: 36vw;
+    text-align: center;
+    font-size: 3vh;
+}
+
+.weather {
+    width: 8vw;
+    height: 15vh; 
+    margin-left: 1vw;
+    border-radius: 1vw;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid white;
+    display: inline-block;
+}
+
+.weather:hover {
+    background-color: rgba(0, 0, 0, 0.8);
 }
