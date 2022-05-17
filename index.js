@@ -54,6 +54,7 @@ async function loadTracks () {
     var track = document.getElementById("trackOption");
     var selectedTrack = track[0].innerHTML;
     document.getElementById("trackTitle").innerHTML = selectedTrack;
+    getWeather(37.8501, 144.9690);
 }
 
 
@@ -295,7 +296,9 @@ function updateInterface(i, result) {
 async function trackChange () {
     const selectBox = document.getElementById('trackOption');
     const selected = selectBox.value;
-    
+    const index = selectBox.selectedIndex;
+    document.getElementById("trackTitle").innerHTML = selectBox[index].innerHTML;
+
     const response = await fetch('http://ergast.com/api/f1/circuits/' + selected + '.json');
     const data = await response.json();
 

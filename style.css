@@ -68,7 +68,7 @@ li:hover {
 }
 
 ul {
-    margin-top: 3vh;
+    margin-top: 5vh;
     margin-left: 1vw;
     padding: 0;
     list-style: none;
@@ -146,6 +146,7 @@ h3 {
 
 .weather:hover {
     background-color: rgba(0, 0, 0, 0.6);
+    cursor: default;
 }
 
 img {
@@ -155,6 +156,11 @@ img {
     margin-left: 2vw;
     padding: 0;
     display: block;
+    animation: image;
+    animation-duration: 0.5s;
+}
+
+#trackTitle {
     animation: image;
     animation-duration: 0.5s;
 }
@@ -169,4 +175,8 @@ p {
     display: block;
     margin: 0;
     padding: 0;
+}
+
+.times {
+    margin-top: 0.5vh;
 }
