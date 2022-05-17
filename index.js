@@ -21,6 +21,7 @@ async function loadLeaderboard() {
         item.style.backgroundColor = color;
         list.appendChild(item);
     }
+    trackChange();
 }
 
 
@@ -244,28 +245,29 @@ function randomInt(min, max) {
 }
 
 
-async function getWeather (driversList, city) {
-    const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + weather_API_Key)
+async function getWeather (lat, long) {
+    const response = await fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + lat + '&lon=' + long + '&cnt=3&appid=' + weather_API_Key);
     const data = await response.json();
-    console.log(data);
-    const { name } = data;
-    const { icon, description } = data.weather[0];
-    const { temp } = data.main;
-    const { speed } = data.wind;
-    console.log(name + icon + description + temp + speed);
-
-    let elements = document.getElementsByClassName('weather');
-    console.log(elements);
-    for (let i=0; i < elements.length; i++){ 
+    const hourlyData = data.list;
+    const elements = document.getElementsByClassName('weather');
+    for (let i = 0; i < hourlyData.length; i++){
+        const { icon, description } = hourlyData[i].weather[0];
+        let { temp } = hourlyData[i].main;
+        temp = parseInt(temp) - 273.15;
+        temp = Math.round(temp);
         elements[i].innerHTML = "";
         const iconURL = 'http://openweathermap.org/img/wn/' + icon + '@2x.png'
         const item = document.createElement("img");
         item.src = iconURL;
         elements[i].appendChild(item);
         const temperature = document.createElement("p");
-        temperature.innerHTML = temp;
+        temperature.innerHTML = temp + '&deg';
         elements[i].appendChild(temperature);
+        const desc = document.createElement("p");
+        desc.innerHTML = description;
+        elements[i].appendChild(desc);
     }
+    
 }
 
 
@@ -288,7 +290,20 @@ function updateInterface(i, result) {
             updateInterface(i, result);            
         }                       
     }, 500)
-    }
+}
+
+async function trackChange () {
+    const selectBox = document.getElementById('trackOption');
+    const selected = selectBox.value;
+    
+    const response = await fetch('http://ergast.com/api/f1/circuits/' + selected + '.json');
+    const data = await response.json();
+
+    const lat = data.MRData.CircuitTable.Circuits[0].Location.lat;
+    const long = data.MRData.CircuitTable.Circuits[0].Location.long;
+    getWeather(lat, long);
+}
+
 
 async function predictRace () {
 
@@ -334,8 +349,6 @@ async function predictRace () {
     list.innerHTML = "";
 
     updateInterface(0, finalResult);
-
-    getWeather(driversList, 'miami');
 }
 
 
