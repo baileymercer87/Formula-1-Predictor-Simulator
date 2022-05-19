@@ -9,7 +9,7 @@ async function loadLeaderboard() {
     var driverStandings = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const list = document.getElementById("presentList");
 
-    for (let i=0; i < 10; i++) {
+    for (let i=0; i < 20; i++) {
         const lname = driverStandings[i].Driver.familyName;
         const fname = driverStandings[i].Driver.givenName;
         const constructor = driverStandings[i].Constructors[0].constructorId;
@@ -55,13 +55,6 @@ async function loadTracks () {
     var selectedTrack = track[0].innerHTML;
     document.getElementById("trackTitle").innerHTML = selectedTrack;
     getWeather(37.8501, 144.9690);
-}
-
-async function getTimes (raceNum) {
-    const response = await fetch('http://ergast.com/api/f1/2022/' + raceNum + '.json');
-    const data = await response.json();
-    const circuitData = data.MRData.RaceTable.Races[0];
-    console.log(circuitData);
 }
 
 
@@ -295,7 +288,7 @@ function updateInterface(i, result) {
         item.style.backgroundColor = color;
         list.appendChild(item);
         i++;             
-        if (i < 10) {    
+        if (i < 20) {    
             updateInterface(i, result);            
         }                       
     }, 500)
@@ -315,9 +308,10 @@ async function trackChange () {
     const response1 = await fetch('http://ergast.com/api/f1/2022.json');
     const data1 = await response1.json();
     const races = data1.MRData.RaceTable.Races;
+
+
     for (let i=0; i < races.length; i++) {
         if (races[i].Circuit.circuitId === selected) {
-            console.log(races[i]);
             const timesArea = document.getElementsByClassName('times');
             timesArea[0].innerHTML = 'FP1 - ' + races[i].FirstPractice.time;
             timesArea[1].innerHTML = 'FP2 - ' + races[i].SecondPractice.time;
@@ -359,7 +353,7 @@ async function predictRace () {
     driversList.sort(function(a,b) {
         return a[11]-b[11]
     });
-    console.log(driversList);
+
     const notCrashed = []
     const crashed = []
 

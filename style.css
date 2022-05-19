@@ -46,10 +46,10 @@ aside {
 
 
 li {
-    height: 8vh;
+    height: 4vh;
     width: 20vw;
-    margin-top: 1vh;
-    margin-left: 0;
+    margin-top: 0.5vh;
+    margin-left: 1vw;
     background-color: black;
     border-radius: 5px;
     color: white;
@@ -68,10 +68,13 @@ li:hover {
 }
 
 ul {
-    margin-top: 5vh;
     margin-left: 1vw;
     padding: 0;
+    height: 96vh;
+    width: 22vw;
     list-style: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 2vw;
 }
 
 
@@ -136,12 +139,14 @@ h3 {
 }
 
 .weather {
-    width: 8vw;
+    width: 8.5vw;
     height: 18vh; 
-    margin-left: 1vw;
+    margin-left: 0.5vw;
     border-radius: 1vw;
     border: 1px solid white;
     display: inline-block;
+    margin-top: none;
+    text-align: center;
 }
 
 .weather:hover {
@@ -172,11 +177,15 @@ img {
 
 p {
     color: white;
-    display: block;
     margin: 0;
     padding: 0;
 }
 
 .times {
     margin-top: 0.5vh;
+}
+
+div {
+    margin: 0;
+    padding: 0;
 }
