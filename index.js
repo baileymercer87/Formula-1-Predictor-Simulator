@@ -292,8 +292,15 @@ function updateInterface(i, result) {
         const div = document.createElement("div");
         const driver =document.createElement("p");
 
-        heading.innerHTML = (i+1);
-        driver.innerHTML = fname + " " + lname;
+        const driverCode = '(' + lname.substring(0,3).toUpperCase() + ')';
+        if (result[i][4] == '0'){
+            heading.innerHTML = 'XX';
+            heading.style.color = 'red';
+        } else {
+            heading.innerHTML = (i+1);
+        }
+
+        driver.innerHTML = fname + " " + lname + "  " + driverCode;
         driver.classList.add('leaderboard');
         div.setAttribute("id", "marker");
         div.style.backgroundColor = color;
@@ -376,10 +383,10 @@ async function predictRace () {
 
     for (i=0; i < driversList.length; i++) {
         if (driversList[i][11] === '0') {
-            crashed.push([driversList[i][1], driversList[i][2], driversList[i][5], 'Crashed']);
+            crashed.push([driversList[i][1], driversList[i][2], driversList[i][5], 'Crashed', driversList[i][11]]);
         }
         else {
-            notCrashed.push([driversList[i][1], driversList[i][2], driversList[i][5], 'Not Crashed']);
+            notCrashed.push([driversList[i][1], driversList[i][2], driversList[i][5], 'Not Crashed', driversList[i][11]]);
         }
     }
     const finalResult = notCrashed.concat(crashed);
