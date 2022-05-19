@@ -50,7 +50,7 @@ li {
     width: 20vw;
     margin-top: 0.5vh;
     margin-left: 1vw;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 5px;
     color: white;
     opacity: 80%;
@@ -61,10 +61,6 @@ li {
 @keyframes pract {
     0% {width:0vw}
     100%{width:20vw}
-}
-
-li:hover {
-    background-color: aqua;
 }
 
 ul {
@@ -201,6 +197,17 @@ h4 {
     background-color: rgba(256, 256, 256, 1);
     color: black;
     border-radius: 0 0 8px 0; 
+    animation: place;
+    animation-duration: 0.2s;
+}
+
+@keyframes place {
+    0% {
+        opacity: 0%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }
 
 .leaderboard {
@@ -208,6 +215,8 @@ h4 {
     float: left;
     font-size: 2.1vh;
     margin-top: 0.6vh;
+    animation: leftright;
+    animation-duration: 0.7s;
 }
 
 #marker {
@@ -220,4 +229,33 @@ h4 {
     margin-top: 0.4vh;
     margin-right:1vw;
     border-radius: 1px;
+    animation: topdown;
+    animation-duration: 0.4s;
+}
+
+@keyframes topdown {
+    0% {
+        height: 0vh;
+    }
+    25% {
+        height: 0vh;
+    }
+    100% {
+        height:3.2vh;
+    }
+}
+
+@keyframes leftright {
+    0% {
+        opacity: 0%;
+    }
+    50% {
+        opacity: 0%;
+    }
+    75% {
+        opacity: 50%;
+    }
+    100% {
+        opacity: 100%;
+    }
 }

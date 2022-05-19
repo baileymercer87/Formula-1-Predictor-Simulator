@@ -282,11 +282,28 @@ function updateInterface(i, result) {
         const constructor = result[i][2];
 
         var color = getConstructor(constructor);
+
         const item = document.createElement("li");
-        var name = (i+1) + ". " + fname + " " + lname;
-        item.innerHTML = name;
-        item.style.backgroundColor = color;
-        list.appendChild(item);
+        const elementId = 'list' + (i+1);
+        item.setAttribute("id", elementId);
+        list.appendChild(item)
+
+        const heading = document.createElement("h4");
+        const div = document.createElement("div");
+        const driver =document.createElement("p");
+
+        heading.innerHTML = (i+1);
+        driver.innerHTML = fname + " " + lname;
+        driver.classList.add('leaderboard');
+        div.setAttribute("id", "marker");
+        div.style.backgroundColor = color;
+
+        const listItem = document.getElementById(elementId); 
+        listItem.appendChild(heading);
+        listItem.appendChild(div);
+        listItem.appendChild(driver);
+
+
         i++;             
         if (i < 20) {    
             updateInterface(i, result);            
