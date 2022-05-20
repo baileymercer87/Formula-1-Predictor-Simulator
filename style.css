@@ -48,7 +48,7 @@ aside {
 li {
     height: 4vh;
     width: 20vw;
-    margin-top: 0.5vh;
+    margin-top: 0.4vh;
     margin-left: 1vw;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 5px;
@@ -59,8 +59,17 @@ li {
 }
 
 @keyframes pract {
-    0% {width:0vw}
-    100%{width:20vw}
+    0% {
+        width:0vw;
+        border-right: 3px solid;
+    }
+    95% {
+        border-right: 3px solid;
+    }
+    100% {
+        border-right: none;
+        width:20vw;
+    }
 }
 
 ul {

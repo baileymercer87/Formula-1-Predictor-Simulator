@@ -127,6 +127,10 @@ async function getSeasonResults (driversList) {
                 driversList[i][8].push(driverResults[x].Results[0].position);
             }
         }
+        if (driverList[i][0] === 'vettel') {
+            driversList[i][8].push(13);
+            driversList[i][8].push(13);
+        }
     }
     return driversList;
 }
