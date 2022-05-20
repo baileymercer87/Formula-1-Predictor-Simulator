@@ -8,19 +8,15 @@ async function loadLeaderboard() {
 
     var driverStandings = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const list = document.getElementById("presentList");
-
+    driversList = [];
     for (let i=0; i < 20; i++) {
         const lname = driverStandings[i].Driver.familyName;
         const fname = driverStandings[i].Driver.givenName;
         const constructor = driverStandings[i].Constructors[0].constructorId;
-
-        var color = getConstructor(constructor);
-        const item = document.createElement("li");
-        var name = (i+1) + ". " + fname + " " + lname;
-        item.innerHTML = name;
-        item.style.backgroundColor = color;
-        list.appendChild(item);
+        driversList.push([]);
+        driversList[i].push(fname, lname, constructor, 'na', 'na');
     }
+    updateInterface(0, driversList);
     trackChange();
 }
 
@@ -269,15 +265,19 @@ async function getWeather (lat, long) {
         const temperature = document.createElement("p");
         temperature.innerHTML = temp + '&deg';
         elements[i].appendChild(temperature);
+        const descriptionSplit = description.split(" ");
         const desc = document.createElement("p");
-        desc.innerHTML = description;
+        desc.style.marginTop = '1vh';
+        for (let i = 0; i < descriptionSplit.length; i++) {
+            desc.innerHTML += descriptionSplit[i].charAt(0).toUpperCase() + descriptionSplit[i].slice(1) + '<br>';
+        }
         elements[i].appendChild(desc);
     }
     
 }
 
 
-function updateInterface(i, result) {      
+function updateInterface(i, result, timeout) {      
     setTimeout(function() {   
         const list = document.getElementById("presentList"); 
         
@@ -369,7 +369,6 @@ async function predictRace () {
 
     driversList = await getSeasonCrashes(driversList);
 
-    //const weather = getWeather();
     driversList = calculateAverage(driversList);
     
     driversList = calculatePointsModifier(driversList);
