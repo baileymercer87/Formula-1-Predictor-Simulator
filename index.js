@@ -1,4 +1,4 @@
-const teamColors = [['ferrari', '#A6051A'], ['red_bull', '#0600EF'], ['mercedes', '#00D2BE'], ['mclaren', '#FF8700'], ['alpine', '#0090FF'], ['alfa', '#900000'], ['haas', '#DBDBDB'], ['alphatauri', '	#2B4562'], ['williams', '#005AFF'], ['aston_martin', '	#006F62']];
+const teamColors = [['ferrari', '#A6051A'], ['red_bull', '#0600EF'], ['mercedes', '#00D2BE'], ['mclaren', '#FF8700'], ['alpine', '#0090FF'], ['alfa', '#900000'], ['haas', '#DBDBDB'], ['alphatauri', '	#2B4562'], ['williams', '#005AFF'], ['aston_martin', '#006F62']];
 
 const weather_API_Key = '7747a50bf9db18f84cab124985c87878';
 
