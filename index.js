@@ -1,4 +1,4 @@
-const teamColors = [['ferrari', '#A6051A'], ['red_bull', '#0600EF'], ['mercedes', '	#00D2BE'], ['mclaren', '#FF8700'], ['alpine', '#0090FF'], ['alfa', '#900000'], ['haas', '#DBDBDB'], ['alphatauri', '	#2B4562'], ['williams', '#005AFF'], ['aston_martin', '	#006F62']];
+const teamColors = [['ferrari', '#A6051A'], ['red_bull', '#0600EF'], ['mercedes', '#00D2BE'], ['mclaren', '#FF8700'], ['alpine', '#0090FF'], ['alfa', '#900000'], ['haas', '#DBDBDB'], ['alphatauri', '	#2B4562'], ['williams', '#005AFF'], ['aston_martin', '	#006F62']];
 
 const weather_API_Key = '7747a50bf9db18f84cab124985c87878';
 
@@ -124,8 +124,8 @@ async function getSeasonResults (driversList) {
             }
         }
         if (driverList[i][0] === 'vettel') {
-            driversList[i][8].push(13);
-            driversList[i][8].push(13);
+            driversList[i][8].push(14);
+            driversList[i][8].push(14);
         }
     }
     return driversList;
@@ -313,6 +313,11 @@ function updateInterface(i, result, timeout) {
         listItem.appendChild(heading);
         listItem.appendChild(div);
         listItem.appendChild(driver);
+
+        const image = document.createElement("img");
+        image.src = '/Formula-1-Predictor-Simulator/images/' + constructor + '.png';
+        image.classList.add('leaderboardImage');
+        listItem.appendChild(image);
 
 
         i++;             

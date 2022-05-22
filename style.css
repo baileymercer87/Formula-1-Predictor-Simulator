@@ -41,7 +41,7 @@ aside {
 }
 
 #column3 {
-    width: 40vw;
+    width: 37vw;
 }
   
 
@@ -268,4 +268,13 @@ h4 {
     100% {
         opacity: 100%;
     }
+}
+
+.leaderboardImage {
+    height: 4vh;
+    width: 4vh;
+    border-radius: 0 5px 5px 0;
+    float: right;
+    margin: 0;
+    padding: 0;
 }
