@@ -4,10 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="animation.css">
 </head>
 
 
 <body id="main" onload="loadLeaderboard(), loadTracks()">
+    <article id="loading">
+      <h1 id="loadingTitle">Prediction Loading...</h1><br>
+      <div id="loadingBar"></div>
+    </article>
     <aside id="column1">
       <div id="topLeaderboard">
         <h1 id="titleText">AI Prediction</h1>

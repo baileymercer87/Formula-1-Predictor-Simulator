@@ -1,0 +1,45 @@
+#loadingBar {
+    width: 20vw;
+    height: 3vh;
+    background-color: blue;
+    border: 2px white solid;
+    margin-left: 40vw;
+    margin-top: 8vh;
+    animation: load infinite linear;
+    animation-duration: 1s;
+}
+
+@keyframes load {
+    0% {
+        width: 0vw;
+    }
+    100% {
+        width: 20vw;
+    }
+}
+
+#loading {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    position: absolute;
+    text-align: center;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: loadingScreen;
+    animation-duration: 0.5s;
+}
+
+@keyframes loadingScreen {
+    0% {
+        background-color: rgba(0, 0, 0, 0)
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0.8)
+    }
+}
+
+#loadingTitle {
+    font-size: 5vh;
+    margin-top: 40vh;
+}

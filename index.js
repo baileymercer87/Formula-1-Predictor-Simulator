@@ -362,6 +362,8 @@ async function trackChange () {
 
 async function predictRace () {
 
+    const loading = document.getElementById("loading");
+    loading.style.display = 'block';
     let driversList = await getDriversList();
 
     driversList = await getDriverStandings(driversList);
@@ -401,7 +403,7 @@ async function predictRace () {
 
     const list = document.getElementById("presentList");
     list.innerHTML = "";
-
+    loading.style.display = 'none';
     updateInterface(0, finalResult);
 }
 
