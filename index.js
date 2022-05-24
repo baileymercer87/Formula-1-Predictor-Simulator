@@ -3,6 +3,7 @@ const teamColors = [['ferrari', '#A6051A'], ['red_bull', '#0600EF'], ['mercedes'
 const weather_API_Key = '7747a50bf9db18f84cab124985c87878';
 
 async function loadLeaderboard() {
+
     const response = await fetch('http://ergast.com/api/f1/current/driverStandings.json');
     var drivers = await response.json();
 
@@ -29,6 +30,18 @@ function getConstructor (constructor) {
     }
 }
 
+function timezoneChange () {
+    const options = document.getElementById('timezoneOption');
+    const times = document.getElementsByClassName('times');
+    console.log(options);
+
+    for (let i =0; i < times.length; i++) {
+        console.log(times[i].innerHTML);
+    }
+
+    var offset = new Date().getTimezoneOffset();
+    console.log(offset);
+}
 
 async function loadTracks () {
 

@@ -311,3 +311,9 @@ ul {
     letter-spacing: 3px;
     margin-top: 2vh;
 }
+
+#timezoneOption {
+    width: 8vw;
+    text-align: center;
+    margin-top: 5vh;
+}

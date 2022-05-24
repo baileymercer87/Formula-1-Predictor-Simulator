@@ -28,6 +28,13 @@
       </select>
 
       <button type="submit" onclick="predictRace()">Predict Race</button>
+
+      <label>Select Your Timezone:</label>
+      <select id="timezoneOption" onchange="timezoneChange()">
+        <option value="-1">TST</option>
+        <option value="0">GMT</option>
+        <option value="1">BST</option>
+      </select>
     </aside>
 
     <aside id="column3">
