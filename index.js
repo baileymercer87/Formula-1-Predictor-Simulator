@@ -21,26 +21,12 @@ async function loadLeaderboard() {
     trackChange();
 }
 
-
 function getConstructor (constructor) {
     for (let i=0; i < 10; i++) {
         if (teamColors[i][0] === constructor) {
             return teamColors[i][1];
         }
     }
-}
-
-function timezoneChange () {
-    const options = document.getElementById('timezoneOption');
-    const times = document.getElementsByClassName('times');
-    console.log(options);
-
-    for (let i =0; i < times.length; i++) {
-        console.log(times[i].innerHTML);
-    }
-
-    var offset = new Date().getTimezoneOffset();
-    console.log(offset);
 }
 
 async function loadTracks () {
@@ -65,8 +51,6 @@ async function loadTracks () {
     document.getElementById("trackTitle").innerHTML = selectedTrack;
     getWeather(37.8501, 144.9690);
 }
-
-
 
 async function getDriverStandings (driversList) {
     driverStand = [];
@@ -355,15 +339,18 @@ async function trackChange () {
     const data1 = await response1.json();
     const races = data1.MRData.RaceTable.Races;
 
-
+    const timezoneChoice = document.getElementById('timezoneOption');
+    const timezone = timezoneChoice[timezoneChoice.selectedIndex].innerHTML;
+    const offset = timezoneChoice.value;
     for (let i=0; i < races.length; i++) {
         if (races[i].Circuit.circuitId === selected) {
+            console.log('here');
             const timesArea = document.getElementsByClassName('times');
-            timesArea[0].innerHTML = 'FP1 - ' + races[i].FirstPractice.time;
-            timesArea[1].innerHTML = 'FP2 - ' + races[i].SecondPractice.time;
-            timesArea[2].innerHTML = 'FP3 - ' + races[i].ThirdPractice.time;
-            timesArea[3].innerHTML = 'Qualifying - ' + races[i].Qualifying.time;
-            timesArea[4].innerHTML = 'Race - ' + races[i].time;
+            timesArea[0].innerHTML = 'FP1 - ' + (parseInt(races[i].FirstPractice.time) + parseInt(offset)) + ':00   ' + timezone;
+            timesArea[1].innerHTML = 'FP2 - ' + (parseInt(races[i].SecondPractice.time) + parseInt(offset)) + ':00   ' + timezone;
+            timesArea[2].innerHTML = 'FP3 - ' + (parseInt(races[i].ThirdPractice.time) + parseInt(offset)) + ':00   ' + timezone;
+            timesArea[3].innerHTML = 'Qualifying - ' + (parseInt(races[i].Qualifying.time) + parseInt(offset)) + ':00   ' + timezone;
+            timesArea[4].innerHTML = 'Race - ' + (parseInt(races[i].time) + parseInt(offset)) + ':00   ' + timezone;
             document.getElementById('trackTitle').innerHTML = races[i].raceName;
         }
     }

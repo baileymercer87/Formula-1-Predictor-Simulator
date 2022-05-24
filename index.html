@@ -8,7 +8,7 @@
 </head>
 
 
-<body id="main" onload="loadLeaderboard(), loadTracks()">
+<body id="main" onload="loadTracks(), loadLeaderboard()">
     <article id="loading">
       <h1 id="loadingTitle">Prediction Loading...</h1><br>
       <img alt="trye" src="/Formula-1-Predictor-Simulator/images/tyre.png" id="tyreImage"/>
@@ -30,10 +30,21 @@
       <button type="submit" onclick="predictRace()">Predict Race</button>
 
       <label>Select Your Timezone:</label>
-      <select id="timezoneOption" onchange="timezoneChange()">
-        <option value="-1">TST</option>
+      <select id="timezoneOption" onchange="trackChange()">
         <option value="0">GMT</option>
-        <option value="1">BST</option>
+        <option value="1" selected>BST</option>
+        <option value="2">CEST</option>
+        <option value="3">EEST</option>
+        <option value="3">AST</option>
+        <option value="8">CST</option>
+        <option value="10">AEST</option>
+        <option value="-3">BRT</option>
+        <option value="-4">AMT</option>
+        <option value="-3">ADT</option>
+        <option value="-4">EDT</option>
+        <option value="-5">CDT</option>
+        <option value="-6">MDT</option>
+        <option value="-7">PDT</option>
       </select>
     </aside>
 
