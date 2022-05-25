@@ -10,16 +10,21 @@ async function loadLeaderboard() {
     var driverStandings = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const list = document.getElementById("presentList");
     driversList = [];
-    for (let i=0; i < 20; i++) {
-        const lname = driverStandings[i].Driver.familyName;
-        const fname = driverStandings[i].Driver.givenName;
-        const constructor = driverStandings[i].Constructors[0].constructorId;
-        driversList.push([]);
-        driversList[i].push(fname, lname, constructor, 'na', 'na');
+    for (let i=0; i < 21; i++) {
+        if (driverStandings[i].Driver.givenName !== 'Nico') {
+            const lname = driverStandings[i].Driver.familyName;
+            const fname = driverStandings[i].Driver.givenName;
+            const constructor = driverStandings[i].Constructors[0].constructorId;
+            driversList.push([]);
+            console.log(driversList);
+            console.log(fname + lname + constructor);
+            driversList[(driversList.length - 1)].push(fname, lname, constructor, 'na', 'na');
+        }
     }
     updateInterface(0, driversList);
     trackChange();
 }
+
 
 function getConstructor (constructor) {
     for (let i=0; i < 10; i++) {
@@ -344,20 +349,33 @@ async function trackChange () {
     const offset = timezoneChoice.value;
     for (let i=0; i < races.length; i++) {
         if (races[i].Circuit.circuitId === selected) {
-            console.log('here');
             const timesArea = document.getElementsByClassName('times');
-            timesArea[0].innerHTML = 'FP1 - ' + (parseInt(races[i].FirstPractice.time) + parseInt(offset)) + ':00   ' + timezone;
-            timesArea[1].innerHTML = 'FP2 - ' + (parseInt(races[i].SecondPractice.time) + parseInt(offset)) + ':00   ' + timezone;
-            timesArea[2].innerHTML = 'FP3 - ' + (parseInt(races[i].ThirdPractice.time) + parseInt(offset)) + ':00   ' + timezone;
-            timesArea[3].innerHTML = 'Qualifying - ' + (parseInt(races[i].Qualifying.time) + parseInt(offset)) + ':00   ' + timezone;
-            timesArea[4].innerHTML = 'Race - ' + (parseInt(races[i].time) + parseInt(offset)) + ':00   ' + timezone;
+            timesArea[0].innerHTML = 'FP1 - ' + (getTime(races[i].FirstPractice.time, offset)) + ':00   ' + timezone;
+            timesArea[1].innerHTML = 'FP2 - ' + (getTime(races[i].SecondPractice.time, offset)) + ':00   ' + timezone;
+            timesArea[2].innerHTML = 'FP3 - ' + (getTime(races[i].ThirdPractice.time, offset)) + ':00   ' + timezone;
+            timesArea[3].innerHTML = 'Qualifying - ' + (getTime(races[i].Qualifying.time, offset)) + ':00   ' + timezone;
+            timesArea[4].innerHTML = 'Race - ' + (getTime(races[i].time, offset)) + ':00   ' + timezone;
             document.getElementById('trackTitle').innerHTML = races[i].raceName;
         }
     }
-
-
 }
 
+function getTime (time, offset) {
+    let newTime = parseInt(time) + parseInt(offset);
+    console.log(time);
+    console.log(offset);
+    console.log(newTime);
+    if (newTime < 1) {
+        console.log('here1');
+        newTime = 24 + newTime;
+    }
+    else if (newTime > 24) {
+        console.log('here2');
+        newTime = newTime - 24;
+    }
+    console.log(newTime);
+    return newTime;
+}
 
 
 async function predictRace () {
