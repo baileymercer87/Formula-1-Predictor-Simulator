@@ -16,8 +16,6 @@ async function loadLeaderboard() {
             const fname = driverStandings[i].Driver.givenName;
             const constructor = driverStandings[i].Constructors[0].constructorId;
             driversList.push([]);
-            console.log(driversList);
-            console.log(fname + lname + constructor);
             driversList[(driversList.length - 1)].push(fname, lname, constructor, 'na', 'na');
         }
     }
@@ -192,7 +190,6 @@ function calculateAverage (drivers) {
         }
         average = average / length;
         drivers[i][11] = average.toFixed(2);
-        console.log(drivers[i][0] + ": " + drivers[i][11]);
     }
     return drivers;
 }
@@ -350,11 +347,11 @@ async function trackChange () {
     for (let i=0; i < races.length; i++) {
         if (races[i].Circuit.circuitId === selected) {
             const timesArea = document.getElementsByClassName('times');
-            timesArea[0].innerHTML = 'FP1 - ' + (getTime(races[i].FirstPractice.time, offset)) + ':00   ' + timezone;
-            timesArea[1].innerHTML = 'FP2 - ' + (getTime(races[i].SecondPractice.time, offset)) + ':00   ' + timezone;
-            timesArea[2].innerHTML = 'FP3 - ' + (getTime(races[i].ThirdPractice.time, offset)) + ':00   ' + timezone;
-            timesArea[3].innerHTML = 'Qualifying - ' + (getTime(races[i].Qualifying.time, offset)) + ':00   ' + timezone;
-            timesArea[4].innerHTML = 'Race - ' + (getTime(races[i].time, offset)) + ':00   ' + timezone;
+            timesArea[1].innerHTML = 'FP1 - ' + (getTime(races[i].FirstPractice.time, offset)) + ':00   ' + timezone;
+            timesArea[2].innerHTML = 'FP2 - ' + (getTime(races[i].SecondPractice.time, offset)) + ':00   ' + timezone;
+            timesArea[4].innerHTML = 'FP3 - ' + (getTime(races[i].ThirdPractice.time, offset)) + ':00   ' + timezone;
+            timesArea[5].innerHTML = 'Qualifying - ' + (getTime(races[i].Qualifying.time, offset)) + ':00   ' + timezone;
+            timesArea[7].innerHTML = 'Race - ' + (getTime(races[i].time, offset)) + ':00   ' + timezone;
             document.getElementById('trackTitle').innerHTML = races[i].raceName;
         }
     }
@@ -362,18 +359,12 @@ async function trackChange () {
 
 function getTime (time, offset) {
     let newTime = parseInt(time) + parseInt(offset);
-    console.log(time);
-    console.log(offset);
-    console.log(newTime);
     if (newTime < 1) {
-        console.log('here1');
         newTime = 24 + newTime;
     }
     else if (newTime > 24) {
-        console.log('here2');
         newTime = newTime - 24;
     }
-    console.log(newTime);
     return newTime;
 }
 
