@@ -347,10 +347,13 @@ async function trackChange () {
     for (let i=0; i < races.length; i++) {
         if (races[i].Circuit.circuitId === selected) {
             const timesArea = document.getElementsByClassName('times');
+            timesArea[0].innerHTML = races[i].FirstPractice.date + " / Friday:";
             timesArea[1].innerHTML = 'FP1 - ' + (getTime(races[i].FirstPractice.time, offset)) + ':00   ' + timezone;
             timesArea[2].innerHTML = 'FP2 - ' + (getTime(races[i].SecondPractice.time, offset)) + ':00   ' + timezone;
+            timesArea[3].innerHTML = races[i].ThirdPractice.date + " /  Saturday:";
             timesArea[4].innerHTML = 'FP3 - ' + (getTime(races[i].ThirdPractice.time, offset)) + ':00   ' + timezone;
             timesArea[5].innerHTML = 'Qualifying - ' + (getTime(races[i].Qualifying.time, offset)) + ':00   ' + timezone;
+            timesArea[6].innerHTML = races[i].date + " / Sunday:";
             timesArea[7].innerHTML = 'Race - ' + (getTime(races[i].time, offset)) + ':00   ' + timezone;
             document.getElementById('trackTitle').innerHTML = races[i].raceName;
         }
