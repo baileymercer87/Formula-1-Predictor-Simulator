@@ -2,6 +2,11 @@ const teamColors = [['ferrari', '#A6051A'], ['red_bull', '#0600EF'], ['mercedes'
 
 const weather_API_Key = '7747a50bf9db18f84cab124985c87878';
 
+window.addEventListener('unload', function(event) {
+    localStorage.setItem('timezone', document.getElementById('timezoneOption')[document.getElementById('timezoneOption').selectedIndex].innerHTML);
+    localStorage.setItem('track', document.getElementById('trackOption')[document.getElementById('trackOption').selectedIndex].innerHTML);
+});
+
 async function loadLeaderboard() {
 
     const response = await fetch('http://ergast.com/api/f1/current/driverStandings.json');
@@ -22,7 +27,6 @@ async function loadLeaderboard() {
     updateInterface(0, driversList);
     trackChange();
 }
-
 
 function getConstructor (constructor) {
     for (let i=0; i < 10; i++) {
@@ -432,5 +436,3 @@ async function predictRace () {
     //array of season results, 8
     //array of previous track, 9
 //num of crashes, 10  
-
-
