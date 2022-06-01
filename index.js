@@ -51,12 +51,24 @@ async function loadTracks () {
         const item = document.createElement("option");
         item.value = circuits[i].circuitId;
         item.innerHTML = circuit;
+        if (circuit === localStorage.getItem('track')){
+            item.selected = true;
+        }
         document.getElementById("trackOption").appendChild(item);
     }
     var track = document.getElementById("trackOption");
     var selectedTrack = track[0].innerHTML;
     document.getElementById("trackTitle").innerHTML = selectedTrack;
     getWeather(37.8501, 144.9690);
+}
+
+function loadTimezones () {
+    const items = document.getElementById('timezoneOption').childNodes;
+    for (let i=0; i < items.length; i++){
+        if (items[i].innerHTML === localStorage.getItem('timezone')){
+            items[i].selected = true;
+        }
+    }
 }
 
 async function getDriverStandings (driversList) {
