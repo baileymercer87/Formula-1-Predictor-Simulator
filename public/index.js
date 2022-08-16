@@ -330,7 +330,7 @@ function updateInterface(i, result, timeout) {
         listItem.appendChild(driver);
 
         const image = document.createElement("img");
-        image.src = '/Formula-1-Predictor-Simulator/images/' + constructor + '.png';
+        image.src = '/images/' + constructor + '.png';
         image.classList.add('leaderboardImage');
         listItem.appendChild(image);
 

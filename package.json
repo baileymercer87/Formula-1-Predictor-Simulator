@@ -1,0 +1,22 @@
+{
+  "name": "formula-1-predictor-simulator",
+  "version": "1.0.0",
+  "description": "I aim to make a machine learning web application which predicts / simulates the next F1 race based off of previous data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baileymercer87/Formula-1-Predictor-Simulator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baileymercer87/Formula-1-Predictor-Simulator/issues"
+  },
+  "homepage": "https://github.com/baileymercer87/Formula-1-Predictor-Simulator#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
