@@ -227,7 +227,7 @@ function calculatePointsModifier(drivers) {
 
 function crashModifier (drivers) {
     for (let i=0; i < drivers.length; i++) {
-        const modifierValue = parseFloat("1.0" + (drivers[i][10] *2))
+        const modifierValue = parseFloat("1.0" + (drivers[i][10]))
         const newValue = drivers[i][11] * modifierValue
         drivers[i][11] = newValue.toFixed(2);
     }
